@@ -13,8 +13,10 @@ import {
 import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 const montserrat = Montserrat({ weight: "600", subsets: ["latin"] });
 const Sidebar = () => {
+  const pathname = usePathname();
   const routes = [
     {
       label: "Dashboard",
@@ -75,7 +77,12 @@ const Sidebar = () => {
             <Link
               href={route.href}
               key={route.href}
-              className="text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-white hover:bg-white/10 rounded-lg transition"
+              className={cn(
+                "text-sm group flex p-3 w-full justify-start font-medium cursor-pointer text-zinc-400 hover:text-white hover:bg-white/10 rounded-lg transition",
+                {
+                  "text-white bg-white/10 rounded-lg": route.href === pathname,
+                }
+              )}
             >
               <div className="flex items-center flex-1">
                 <route.icon className={cn("h-5 w-5 mr-3", route.color)} />
