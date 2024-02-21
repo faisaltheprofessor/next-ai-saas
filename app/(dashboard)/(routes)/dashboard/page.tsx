@@ -1,5 +1,5 @@
-const Dashboard = () => {
-  return <p>Dashboard Page(Protected)</p>;
-};
+import { UserButton } from "@clerk/nextjs";
 
-export default Dashboard;
+export default function Dashboard() {
+  return <div className="h-screen"></div>;
+}
