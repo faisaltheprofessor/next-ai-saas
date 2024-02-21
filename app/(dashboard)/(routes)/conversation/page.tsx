@@ -62,6 +62,7 @@ const Conversation = () => {
             </form>
           </Form>
         </div>
+        <div className="space-y-4 mt-4">Message Content</div>
       </div>
     </div>
   );
