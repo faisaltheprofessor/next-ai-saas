@@ -11,7 +11,7 @@ export default function NotFound() {
               <span className="text-pink-600">404</span>
             </h2>
             <p className="text-2xl md:text-3xl dark:text-gray-300">
-              Sorry, we couldn't find this page.
+              Sorry, we couldn&apos;t find this page.
             </p>
             <Link
               href="/dashboard"
