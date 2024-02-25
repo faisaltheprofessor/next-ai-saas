@@ -11,12 +11,16 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { CreateChatCompletionRequestMessage } from "openai/resources/index.mjs";
 import Empty from "@/components/empty";
 import Loader from "@/components/loader";
 import { cn } from "@/lib/utils";
 import UserAvatar from "@/components/user-avatar";
 import BotAvatar from "@/components/bot-avatar";
+
+interface CreateChatCompletionRequestMessage {
+  role: "user" | "sysetm" | "admin";
+  content: string;
+}
 const Conversation = () => {
   const router = useRouter();
   const [messages, setMessages] = useState<
