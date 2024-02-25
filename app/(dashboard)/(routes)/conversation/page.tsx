@@ -115,7 +115,7 @@ const Conversation = () => {
                     ? "bg-white border border-black/10"
                     : "bg-muted"
                 )}
-                key={message.content}
+                key={Math.random() * Math.random() * 100}
               >
                 {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
                 <p className="text-sm">{message.content}</p>
