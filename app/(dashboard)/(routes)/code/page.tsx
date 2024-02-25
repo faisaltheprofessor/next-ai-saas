@@ -1,6 +1,6 @@
 "use client";
 import Heading from "@/components/heading";
-import { MessageSquare } from "lucide-react";
+import { MessageSquare, Code as CodeIcon } from "lucide-react";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
@@ -11,13 +11,20 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { CreateChatCompletionRequestMessage } from "openai/resources/index.mjs";
 import Empty from "@/components/empty";
 import Loader from "@/components/loader";
 import { cn } from "@/lib/utils";
 import UserAvatar from "@/components/user-avatar";
 import BotAvatar from "@/components/bot-avatar";
-const Conversation = () => {
+import ReactMarkDown from "react-markdown";
+
+interface CreateChatCompletionRequestMessage {
+  role: "user" | "assistant" | "system";
+  content: string;
+  name?: string;
+}
+
+const Code = () => {
   const router = useRouter();
   const [messages, setMessages] = useState<
     CreateChatCompletionRequestMessage[]
@@ -39,7 +46,7 @@ const Conversation = () => {
       };
       const newMessages = [...messages, userMessage];
 
-      const response = await axios.post("/api/conversation", {
+      const response = await axios.post("/api/code", {
         messages: newMessages,
       });
 
@@ -56,11 +63,11 @@ const Conversation = () => {
   return (
     <div>
       <Heading
-        title="Conversation"
-        description="Our most advanced conversation model."
-        Icon={MessageSquare}
-        bgColor="bg-violet-500/10"
-        iconColor="text-violet-500"
+        title="Code Generation"
+        description="Generate code using descriptive text"
+        Icon={CodeIcon}
+        bgColor="bg-green-700/10"
+        iconColor="text-green-700"
       />
       <div className="px-4 lg:px-8">
         <div>
@@ -77,7 +84,7 @@ const Conversation = () => {
                       <Input
                         className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                         disabled={isLoading}
-                        placeholder="How do i calculate the radious of a circle?"
+                        placeholder="How to center a div in css?"
                         {...field}
                       />
                     </FormControl>
@@ -118,7 +125,20 @@ const Conversation = () => {
                 key={Math.random() * Math.random() * 100}
               >
                 {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
-                <p className="text-sm">{message.content}</p>
+                <ReactMarkDown
+                  components={{
+                    pre: ({ node, ...props }) => (
+                      <div className="overflow-auto w-full my-2 bg-black/10 p-2 rounded-lg">
+                        <pre {...props} />
+                      </div>
+                    ),
+                    code: ({ node, ...props }) => (
+                      <code className="bg-black/10 rounded-lg p-1" {...props} />
+                    ),
+                  }}
+                >
+                  {message.content || ""}
+                </ReactMarkDown>
               </div>
             ))}
           </div>
@@ -128,4 +148,4 @@ const Conversation = () => {
   );
 };
 
-export default Conversation;
+export default Code;

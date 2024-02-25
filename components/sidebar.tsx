@@ -14,7 +14,11 @@ import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-const montserrat = Montserrat({ weight: "600", subsets: ["latin"] });
+const montserrat = Montserrat({
+  weight: "600",
+  subsets: ["latin"],
+  display: "swap",
+});
 const Sidebar = () => {
   const pathname = usePathname();
   const routes = [
@@ -65,7 +69,7 @@ const Sidebar = () => {
       <div className="px-3 py-2 flex-1">
         <Link href="/dashboard" className="flex items-center pl-3 mb-14">
           <div className="relative h-8 w-8 mr-4">
-            <Image fill alt="Logo" src="/logo.svg" />
+            <Image fill alt="Logo" src="/logo.svg" priority={true} />
           </div>
           <h1 className={cn("text-2xl font-bold", montserrat.className)}>
             Intellecta
