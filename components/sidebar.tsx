@@ -6,7 +6,7 @@ import {
   ImageIcon,
   LayoutDashboard,
   MessageSquare,
-  Music,
+  Music2,
   Settings,
   Video,
 } from "lucide-react";
@@ -48,7 +48,7 @@ const Sidebar = () => {
     },
     {
       label: "Music Generation",
-      icon: Music,
+      icon: Music2,
       href: "/music",
       color: "text-emerald-500",
     },
