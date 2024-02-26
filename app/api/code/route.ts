@@ -42,6 +42,6 @@ export async function POST(
   }
   catch (error) {
     console.log("[CODE_ERROR]", error)
-    return new  NextResponse("Internal Error", {status: 500})
+    return new  NextResponse(`Internal Error: ${error}`, {status: 500})
   }
 }
